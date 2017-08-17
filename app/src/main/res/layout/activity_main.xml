@@ -1,0 +1,134 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/background"
+    style="@style/AppTheme"
+    >
+<LinearLayout
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:ads="http://schemas.android.com/apk/res-auto"
+    style="@style/AppTheme"
+    android:orientation="vertical"
+    android:baselineAligned="false"
+    android:id="@+id/main_linear">
+    <!--android:background="@drawable/background"-->
+
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/et_spielername"
+        android:id="@+id/textView_name"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginRight="10dp" />
+
+    <Spinner
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/sp_spieler"
+        android:clickable="true"
+        android:longClickable="true"
+        android:popupBackground="#FFFFFF" />
+
+    <Button
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/bt_anzeigen"
+        android:id="@+id/bt_anzeigen"
+        android:onClick="strafeAnzeigen"
+        android:background="@drawable/buttons"
+        style="@style/ButtonText"/>
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/tv_strafe"
+        android:id="@+id/textView2"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp" />
+
+    <Spinner
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/sp_strafe"
+        android:longClickable="true"
+        android:popupBackground="#FFFFFF"
+        android:dropDownVerticalOffset="-25dp"
+        android:dropDownWidth="match_parent" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/et_grund_strafe"
+        android:hint="@string/et_grund_strafe"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/bt_anlegen"
+            android:id="@+id/bt_anlegen"
+            android:onClick="strafeAnlegen"
+            android:layout_weight="1"
+            android:layout_gravity="left"
+            android:background="@drawable/buttons"
+            style="@style/ButtonText"/>
+
+        <Button
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:text="@string/bt_loeschen"
+            android:id="@+id/bt_loeschen"
+            android:onClick="strafeLoeschen"
+            android:layout_weight="1"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/buttons"
+            style="@style/ButtonText"/>
+
+        <Button
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:text="@string/bt_gezahlt"
+            android:id="@+id/bt_gezahlt"
+            android:layout_weight="1"
+            android:layout_gravity="right"
+            android:onClick="strafeBezahlt"
+            android:background="@drawable/buttons"
+            style="@style/ButtonText"/>
+    </LinearLayout>
+
+    <Button
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/bt_gesamt"
+        android:id="@+id/bt_gesamt"
+        android:layout_gravity="center_horizontal"
+        android:onClick="gesamtAnzeigen"
+        android:background="@drawable/buttons"
+        style="@style/ButtonText"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="0dp" />
+
+    <com.google.android.gms.ads.AdView
+        android:id="@+id/adView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        ads:adUnitId="ca-app-pub-8747134995439387/1424422154"
+        ads:adSize="SMART_BANNER" />
+
+</LinearLayout>
+</ScrollView>

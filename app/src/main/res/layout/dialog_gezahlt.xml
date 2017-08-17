@@ -1,0 +1,85 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    tools:context="de.hannes.strafenkatalog.StrafeAnlegen"
+    android:background="#34B2FF"
+    style="@style/AppTheme">
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/bt_gezahlt"
+        android:id="@+id/textView2"
+        android:layout_below="@+id/et_strafe"
+        android:layout_centerHorizontal="true" />
+
+    <EditText
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:inputType="numberDecimal"
+        android:ems="10"
+        android:id="@+id/et_gezahlt"
+        android:layout_below="@+id/textView2"
+        android:layout_centerHorizontal="true"
+        android:hint="@string/et_summe" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="€"
+        android:id="@+id/textView"
+        android:layout_toRightOf="@+id/et_gezahlt"
+        android:layout_toEndOf="@+id/et_gezahlt"
+        android:layout_alignBaseline="@+id/et_gezahlt"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/et_grund_bez"
+        android:layout_below="@+id/et_gezahlt"
+        android:layout_centerHorizontal="true"
+        android:hint="@string/et_grund_strafe" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/et_grund_bez"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true">
+
+        <Button
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:text="@string/bt_esc"
+            android:id="@+id/bt_gez_esc"
+            android:singleLine="false"
+            android:layout_below="@+id/et_grund_bez"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:background="@drawable/buttons"
+            style="@style/ButtonText"
+            android:layout_weight="1" />
+
+        <Button
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:text="@string/bt_ok"
+            android:id="@+id/bt_gez_ok"
+            android:layout_alignTop="@+id/bt_gez_esc"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:background="@drawable/buttons"
+            style="@style/ButtonText"
+            android:layout_weight="1" />
+
+    </LinearLayout>
+</RelativeLayout>

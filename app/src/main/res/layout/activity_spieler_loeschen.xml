@@ -1,0 +1,88 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    tools:context="de.hannes.strafenkatalog.SpielerLoeschen"
+    style="@style/AppTheme"
+    android:background="#34B2FF"
+    >
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/tv_sp_del"
+        android:id="@+id/tv_sp_del"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <Spinner
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/sp_spielerdel"
+        android:layout_below="@+id/tv_sp_del"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/bt_esc"
+        android:id="@+id/bt_sp_del_esc"
+        android:background="@drawable/buttons"
+        style="@style/ButtonText"
+        android:layout_weight="1"
+        android:layout_below="@+id/linearLayout"
+        android:layout_centerHorizontal="true" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/sp_spielerdel"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:id="@+id/linearLayout">
+
+        <Button
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:text="@string/bt_change"
+            android:id="@+id/bt_sp_change"
+            android:layout_alignTop="@+id/bt_sp_del_ok"
+            android:layout_toRightOf="@+id/bt_sp_del_esc"
+            android:layout_toEndOf="@+id/bt_sp_del_esc"
+            android:background="@drawable/buttons"
+            style="@style/ButtonText"
+            android:layout_weight="1" />
+
+        <Button
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:text="@string/bt_del"
+            android:id="@+id/bt_sp_del_ok"
+            android:layout_below="@+id/sp_spielerdel"
+            android:layout_alignRight="@+id/sp_spielerdel"
+            android:layout_alignEnd="@+id/sp_spielerdel"
+            android:background="@drawable/buttons"
+            style="@style/ButtonText"
+            android:layout_weight="1" />
+
+        <Button
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:text="@string/bt_delall"
+            android:id="@+id/bt_sp_delall"
+            android:background="@drawable/buttons"
+            style="@style/ButtonText"
+            android:layout_below="@+id/linearLayout"
+            android:layout_centerHorizontal="true"
+            android:layout_weight="1" />
+
+    </LinearLayout>
+
+</RelativeLayout>

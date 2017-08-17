@@ -1,0 +1,25 @@
+Strafenkatalog Version vom 14.09.2015:
+
+Strafen und Spieler können angelegt, geändert und gelöscht werden
+Strafen und Spieler sind in Datenbank abgespeichert(schneller)
+Aber: 	Schreiben von Strafen in Strafenkatalog.xls (wird in Android/data/de.hannes.strafenkatalog/files abgelegt)
+	Auslesen von kompletten Strafenkatalog aus Strafenkatalog.xls
+Optik geändert
+Alert Dialoge eingefügt
+"Laden" Bildschirm wenn xls angelegt oder ausgelesen wird (als Thread implementiert)
+Strafen Faktoren im Strafen Spinner
+xls-Datei zum importieren kann gesucht werden, xls wird zum exportieren in Dateisystem geschrieben
+Datum und Bemerkung können bei Strafe und Gezahltem hinzugefügt werden
+
+TODO:
+Trikotliste/Bierliste....
+strafen negativ und zahlen positiv???
+Mehrere Strafen-Listen verwalten
+Strafen-Verlauf
+Performance verbessern
+Liste für Strafen von allen Spielern als Übersicht (nach Anzahl sortiert)
+xls-Datei Speicherort bestimmen
+Alert wenn Spieler Strafen-Grenze überschritten hat
+Action Bar hinzufügen
+OPTIK verbessern
+Settings-Aktivity: (Einstellen ob Integer oder float strafen, ob Sortierung nach Alphabet)

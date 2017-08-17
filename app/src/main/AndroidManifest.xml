@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="de.hannes.strafenkatalog" >
+
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.VIBRATE"/>
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/strafenkatalog_icon"
+        android:label="@string/app_name"
+        android:versionCode="10"
+        android:versionName="1.1.5"
+        android:theme="@style/AppTheme" >
+        <meta-data android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+        <activity
+            android:name=".MainActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".ListeActivity"
+            android:label="@string/title_activity_list"
+            android:parentActivityName=".MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="de.hannes.strafenkatalog.MainActivity" />
+        </activity>
+        <activity
+            android:name=".RelationListeActivity"
+            android:label="@string/title_activity_list"
+            android:parentActivityName=".ListeActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="de.hannes.strafenkatalog.ListeActivity" />
+        </activity>
+        <activity
+            android:name=".GesamtListeActivity"
+            android:label="@string/title_activity_list"
+            android:parentActivityName=".MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="de.hannes.strafenkatalog.MainActivity" />
+        </activity>
+        <activity
+            android:name=".SpielerAnlegen"
+            android:label="@string/title_activity_spieler_anlegen"
+            android:parentActivityName=".MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="de.hannes.strafenkatalog.MainActivity" />
+        </activity>
+        <activity
+            android:name=".StrafeAnlegen"
+            android:label="@string/title_activity_strafe_anlegen"
+            android:parentActivityName=".MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="de.hannes.strafenkatalog.MainActivity" />
+        </activity>
+        <activity
+            android:name=".SpielerLoeschen"
+            android:label="@string/title_activity_spieler_loeschen"
+            android:parentActivityName=".MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="de.hannes.strafenkatalog.MainActivity" />
+        </activity>
+        <activity
+            android:name=".SettingsActivity"
+            android:label="@string/title_activity_settings"
+            android:parentActivityName=".MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="de.hannes.strafenkatalog.MainActivity" />
+        </activity>
+       <!-- <activity
+            android:name=".FileChooser"
+            android:label="@string/title_activity_file_chooser"
+            android:parentActivityName=".MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="de.hannes.strafenkatalog.MainActivity" />
+        </activity>-->
+        <activity android:name="com.google.android.gms.ads.AdActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"/>
+    </application>
+
+</manifest><!--"@string/app_name"
+    <?xml version="1.0" encoding="utf-8"?>
+    <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+        package="de.hannes.strafenkatalog"
+        android:versionCode="1"
+        android:versionName="1.0">
+        <uses-sdk android:minSdkVersion="13" />
+        <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+        <application android:icon="@drawable/ic_launcher" android:label="@string/app_name"
+            android:theme="@android:style/Theme.Holo.Light">>
+            <activity android:name=".Test"
+                android:label="@string/app_name">
+                <intent-filter>
+                    <action android:name="android.intent.action.MAIN" />
+                    <category android:name="android.intent.category.LAUNCHER" />
+                </intent-filter>
+            </activity>
+        </application>
+    </manifest>
+-->

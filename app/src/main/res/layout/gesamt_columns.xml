@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:clickable="false"
+    android:baselineAligned="false"
+    android:measureWithLargestChild="false"
+    android:orientation="horizontal"
+    android:gravity="center_vertical|fill_horizontal|center_horizontal|fill_vertical"
+    android:paddingBottom="5dp"
+    android:paddingTop="5dp"
+    android:focusable="false"
+    android:focusableInTouchMode="false">
+
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Mediummmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm Text"
+        android:id="@+id/tv_spieler"
+        android:layout_gravity="center_vertical"
+        android:layout_weight="1" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Medium Text"
+        android:id="@+id/tv_gesamt"
+        android:maxLines="1"
+        android:layout_gravity="right"
+        android:layout_marginRight="10dp" />
+
+</LinearLayout>

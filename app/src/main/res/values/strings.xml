@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Strafenkatalog</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Öffnen auf eigene Gefahr!</string>
+    <string name="spieler">Spieler</string>
+    <string name="strafe">Strafe</string>
+    <string name="und">und</string>
+    <string name="nicht_angelegt">nicht angelegt.</string>
+    <string name="vorhanden">bereits vorhanden.</string>
+    <string name="falsches_zeichen">enthält ein irreguläres Zeichen (nur Buchstaben und Zahlen erlaubt).</string>
+    <string name="kein_grund">*ohne Bemerkung*</string>
+    <string name="spieler_abheben">GeldAbhebenSpieler</string>
+    <string name="tv_strafe">Begangenes Vergehen:</string>
+    <string name="bt_anlegen">Strafe eintragen</string>
+    <string name="bt_loeschen">Strafe tilgen</string>
+    <string name="bt_gezahlt">Gezahlt</string>
+    <string name="bt_gezahlt_aendern">Gezahlter Betrag wurde von alter Version angelegt
+                    und muss aktualisiert werden. Bitte gezahlten Betrag eintragen:</string>
+    <string name="et_summe">Summe</string>
+    <string name="bt_anzeigen">Strafsumme anzeigen</string>
+    <string name="bt_gesamt">Übersicht</string>
+    <string name="bt_aendern">Ändern</string>
+    <string name="bt_abheben">Geld abheben</string>
+    <string name="tv_spieler_anlegen">Name des Spielers eingeben:</string>
+    <string name="tv_spieler_aendern"> Neuer Name</string>
+    <string name="tv_strafe_anlegen">Strafenname eingeben:</string>
+    <string name="tv_faktor_anlegen">Betrag der Strafe eingeben:</string>
+    <string name="tv_sp_del">Zu ändernden Spieler auswählen</string>
+    <string name="tv_st_del">Zu ändernde Strafe auswählen</string>
+    <string name="tv_import_grund">Importiert</string>
+    <string name="tv_datum">Datum</string>
+    <string name="bt_esc">Abbrechen</string>
+    <string name="bt_ok">Anlegen</string>
+    <string name="bt_del">Löschen</string>
+    <string name="bt_change">Ändern</string>
+    <string name="bt_delall">Alle Löschen</string>
+    <string name="et_spielername">Name des Spielers</string>
+    <string name="et_strafenname">Name der Strafe</string>
+    <string name="et_strafenfaktor">Faktor</string>
+    <string name="et_grund_strafe">Bemerkung hinzufügen (optional)</string>
+    <string name="dialog_del_message_sp1">Wirklich Spieler</string>
+    <string name="dialog_del_message_st1">Wirklich Strafe</string>
+    <string name="dialog_del_message_2">löschen (inklusive aller Strafen)?</string>
+    <string name="dialog_del_message_3">löschen?</string>
+    <string name="dialog_change_message_2">ändern?</string>
+    <string name="dialog_del_message_spall">Wirklich alle Spieler löschen? (Löschen kann nicht rückgängig gemacht werden! Sichern nach .xls wird empfohlen)</string>
+    <string name="dialog_del_message_stall">Wirklich alle Strafen löschen? (Löschen kann nicht rückgängig gemacht werden! Sichern nach .xls wird empfohlen)</string>
+    <string name="dialog_del_title">Löschen bestätigen</string>
+    <string name="dialog_exportieren1">Strafenkatalog wird nach \'</string>
+    <string name="dialog_exportieren2">\' exportiert.</string>
+    <string name="dialog_importieren">Datei in Android/data/de.hannes.strafenkatalog vorhanden. Soll diese importiert werden?</string>
+    <string name="bt_datei_select">Datei wählen</string>
+    <string name="dialog_block">Strafenkatalog wird gerade exportiert, Bitte warten.</string>
+    <string name="dialog_spielerleer">Keine Spieler vorhanden, Bitte neuen Spieler hinzufügen.</string>
+    <string name="dialog_strafeleer">Keine Strafen vorhanden, Bitte neue Strafe hinzufügen</string>
+    <string name="dialog_rel_aendern">Strafeintrag geändert.</string>
+    <string name="dialog_reset">Wirklich Strafenkatalog zurücksetzen? Alle Strafen (inkl. Gezahltem) aller Spieler werden gelöscht!
+    (Jeder Spieler hat 0 Strafeinheiten, Spieler und Strafen bleiben erhalten, vorheriges Sichern nach .xls wird empfohlen)</string>
+    <string name="t_exportende">Strafenkatalog Exportieren beendet.</string>
+
+
+    <string-array name="spieler_array">
+        <item>Lukas</item>
+        <item>Jogi</item>
+        <item>Benni</item>
+        <item>Basti</item>
+        <item>Almir</item>
+        <item>Gnädig</item>
+        <item>Hannes</item>
+        <item>Leo</item>
+        <item>Pascal</item>
+        <item>Justus</item>
+        <item>Torte</item>
+        <item>Sebi</item>
+        <item>Jernei</item>
+        <item>Matze</item>
+        <item>Ivan</item>
+        <item>Mattis</item>
+        <item>Jo</item>
+        <item>Tobi</item>
+    </string-array>
+    <string-array name="strafen_array">
+        <item>zu spät ins Training</item>
+        <item>mehr als 10 min zu spät ins Training</item>
+        <item>gelbes T-Shirt</item>
+        <item>zu spät zum Spiel</item>
+        <item>mehr als 10 min zu spät zum Spiel</item>
+        <item>kein Aufwärmshirt</item>
+        <item>Kacken/Furzen</item>
+        <item>2 min wegen Motzen</item>
+        <item>rote Karte wegen Motzen</item>
+        <item>Trikot nicht in Tasche</item>
+        <item>Trikots nicht gewaschen</item>
+        <item>nicht beim Abbau geholfen</item>
+        <item>Besitz vergessen</item>
+    </string-array>
+
+    <string name="title_activity_list">Strafen Liste</string>
+    <string name="title_activity_spieler_anlegen">Spieler Anlegen</string>
+    <string name="title_activity_strafe_anlegen">Strafe Anlegen</string>
+    <string name="title_activity_spieler_loeschen">Spieler ändern</string>
+    <string name="title_activity_strafe_loeschen">Strafe ändern</string>
+    <string name="title_activity_file_chooser">FileChooser</string>
+
+</resources>
