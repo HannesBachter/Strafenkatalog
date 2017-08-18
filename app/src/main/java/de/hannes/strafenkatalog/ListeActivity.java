@@ -180,8 +180,8 @@ public class ListeActivity extends ListActivity implements AdapterView.OnItemCli
         //int spielerIndex =  extras.getInt("SPIELER");
         spielerName = extras.getString("SPIELER");
         strafenArray = extras.getStringArrayList("STRAFENARR");
-
         String strafeGez = getString(R.string.bt_gezahlt);
+        String strafeAbh = getString(R.string.bt_abheben);
         //HashMap<String, String> strafenMap = new HashMap<String, String>();
         // Toast.makeText(this, "Strafenanzahl: " + String.valueOf(strafenArray.size()) + "Spielerindex: " +String.valueOf(spielerIndex), Toast.LENGTH_SHORT).show();
 
@@ -189,11 +189,11 @@ public class ListeActivity extends ListActivity implements AdapterView.OnItemCli
         //teilenListe ist String, der in WhatsApp o.Ä. versendet werden kann
 
         for (int strafeIndex = 0; strafeIndex < strafenArray.size(); strafeIndex++){
-
             String strafenName = String.valueOf(strafenArray.get(strafeIndex));
+            Log.w("ListAct:Resume", "Strafenname:"+strafenName);
             float cellval = 0;
 
-            if (!strafenName.equals(getString(R.string.bt_abheben)))
+            //if (!strafenName.equals(getString(R.string.bt_abheben)))
                 cellval = SpielerDB.strafeAuslesen(spielerName, Integer.valueOf(StrafenDB.strafeIdFinden(strafenName)));
 
             if(cellval!=0 && !strafenName.equals(strafeGez)) {
@@ -238,7 +238,10 @@ public class ListeActivity extends ListActivity implements AdapterView.OnItemCli
             teilenListe = teilenListe + "Keine Strafen vorhanden.";
         }
         else {
-            listText.setText("Strafen von "+spielerName+" gesamt: " + String.format("%.2f", gesamtSumme) + "€");
+            if(!spielerName.equals(getString(R.string.spieler_abheben)))
+                listText.setText("Strafen von "+spielerName+" gesamt: " + String.format("%.2f", gesamtSumme) + "€");
+            else
+                listText.setText("Ausgaben gesamt: " + String.format("%.2f", gesamtSumme) + "€");
 
             teilenListe = teilenListe +"\nGesamt:\t"+ String.format("%.2f", gesamtSumme) + "€";
 

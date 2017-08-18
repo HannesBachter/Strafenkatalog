@@ -156,6 +156,18 @@ public class GesamtListeActivity extends ListActivity implements AdapterView.OnI
 
     public void clickText(View v){
         Toast.makeText(GesamtListeActivity.this, "CLICK", Toast.LENGTH_LONG).show();
+        if (!spielerArray.isEmpty()) {
+            //spSpieler = (Spinner) findViewById(R.id.sp_spieler);
+            //spielerIndex = Integer.valueOf(spSpieler.getSelectedItemPosition());
+            String spielerName = getString(R.string.spieler_abheben);
+
+            Intent list = new Intent(this, ListeActivity.class);
+            list.putExtra("SPIELER", spielerName);
+            ArrayList abhebenArray = new ArrayList<String>();
+            abhebenArray.add(getString(R.string.bt_abheben));
+            list.putExtra("STRAFENARR", abhebenArray);
+            startActivity(list);
+        }
     }
 
     @Override

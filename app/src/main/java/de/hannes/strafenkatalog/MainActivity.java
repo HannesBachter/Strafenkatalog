@@ -371,8 +371,8 @@ public class MainActivity extends ActionBarActivity implements AdapterView.OnIte
                             SpielerDB.strafeEintragen(spielerName, strafenId, Float.valueOf(etAbh.getText().toString()));
                             Calendar kal = Calendar.getInstance();
                             String grundAbh = etAbhGrund.getText().toString();
-                            //if(grundAbh.isEmpty())
-                            //    grundAbh = getString(R.string.kein_grund);
+                            if(grundAbh.isEmpty())
+                                grundAbh = getString(R.string.kein_grund);
                             Log.w("MainAct:Abheben", "Spieler: "+spielerName+" Strafen ID:"+strafenId+" Kalender:"+String.valueOf(kal.get(Calendar.DATE))+String.valueOf(kal.get(Calendar.MONTH)+1)+String.valueOf(kal.get(Calendar.YEAR))+" Text: "+etAbh.getText().toString() +" Grund: "+ grundAbh);
                             SpStRelDB.relationEinfügen(spielerName, strafenId,
                                     kal.get(Calendar.DATE), kal.get(Calendar.MONTH)+1, kal.get(Calendar.YEAR), etAbh.getText().toString() +"€ - "+ grundAbh);
