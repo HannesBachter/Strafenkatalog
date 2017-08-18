@@ -14,7 +14,9 @@
         android:id="@+id/tv_list"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="30dp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:clickable="true"
+        android:onClick="clickText"/>
 
     <ListView
         android:layout_width="fill_parent"

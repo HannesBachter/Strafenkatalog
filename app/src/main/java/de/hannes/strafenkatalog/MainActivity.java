@@ -422,7 +422,6 @@ public class MainActivity extends ActionBarActivity implements AdapterView.OnIte
 
             @Override
             public void run() {
-                //TODO: Importieren BUG beheben (0.00 bei Gezahlt importiert)
                 //Spieler aus erster Zeile lesen (ab Zeile 2, da 0. und 1. Zeile die Strafen mit Faktoren sind)
                 int i = 2;
                 while (!(ExcelAgent.readExCellString(mainActivity, filename, i, 0) == "Error reading Cell!" || ExcelAgent.readExCellString(mainActivity, filename, i, 0) == "" || ExcelAgent.readExCellString(mainActivity, filename, i, 0) == " ")) {
@@ -547,6 +546,12 @@ public class MainActivity extends ActionBarActivity implements AdapterView.OnIte
                 //Gezahlt wird nicht im Strafen-Spinner angezeigt, soll aber in Excel eingetragen werden
                 if (!strafenArray.contains(getString(R.string.bt_gezahlt))) {
                     strafenArray.add(getString(R.string.bt_gezahlt));
+                }
+                if (!strafenArray.contains(getString(R.string.bt_abheben))) {
+                    strafenArray.add(getString(R.string.bt_abheben));
+                }
+                if (!spielerArray.contains(getString(R.string.spieler_abheben))) {
+                    spielerArray.add(getString(R.string.spieler_abheben));
                 }
                 for (int i = 0; i < spielerArray.size(); i++) {
                     for (int j = 0; j < strafenArray.size(); j++) {

@@ -36,7 +36,7 @@ public class GesamtListeActivity extends ListActivity implements AdapterView.OnI
     private ArrayList<String> strafenArray = new ArrayList<String>();
     private ArrayList<String> spielerArray = new ArrayList<String>();
     private TextView listText;
-    private float strafenSumme, gesamtSumme, overallgesamtSumme=0, overallgesamtGezahlt=0, overallgesamtAbgehoben=0;
+    private float strafenSumme, gesamtSumme, overallgesamtSumme=0, overallgesamtGezahlt=0, overallgesamtAbgehoben=-0f;
     private int[] strafenFaktor;//= {1,3,2,3,7,2,2,20,20,2,5,10,5,-20};
     private String strafenAnzahl, strafenSumm;
 
@@ -100,16 +100,6 @@ public class GesamtListeActivity extends ListActivity implements AdapterView.OnI
                     overallgesamtGezahlt = overallgesamtGezahlt + strafenSumme;
                 }
             }
-            String strafeAbh = getString(R.string.bt_abheben);
-            String spielerAbh = getString(R.string.spieler_abheben);
-            if(StrafenDB.getAllStrafenNamen().contains(strafeAbh)){
-                float cellval = SpielerDB.strafeAuslesen(spielerAbh, Integer.valueOf(StrafenDB.strafeIdFinden(strafeAbh)));
-                if (cellval > 0) {
-                    strafenSumme = cellval * StrafenDB.strafeFaktorFinden(strafeAbh); //strafenFaktor[strafeIndex];
-                    //gesamtSumme = strafenSumme + gesamtSumme;
-                    overallgesamtAbgehoben = overallgesamtAbgehoben + strafenSumme;
-                }
-            }
 
             HashMap<String, String> strafenMap = new HashMap<String, String>();
 
@@ -121,6 +111,16 @@ public class GesamtListeActivity extends ListActivity implements AdapterView.OnI
             //teilenListe ist String, der in WhatsApp o.Ä. versendet werden kann
             teilenListe = teilenListe + spielerName+":\t \t"+String.format("%.2f", gesamtSumme) + "€\n";
         }
+        String strafeAbh = getString(R.string.bt_abheben);
+        String spielerAbh = getString(R.string.spieler_abheben);
+        if(StrafenDB.getAllStrafenNamen().contains(strafeAbh)){
+            float cellval = SpielerDB.strafeAuslesen(spielerAbh, Integer.valueOf(StrafenDB.strafeIdFinden(strafeAbh)));
+            if (cellval > 0) {
+                strafenSumme = cellval * StrafenDB.strafeFaktorFinden(strafeAbh); //strafenFaktor[strafeIndex];
+                //gesamtSumme = strafenSumme + gesamtSumme;
+                overallgesamtAbgehoben = overallgesamtAbgehoben + strafenSumme;
+            }
+        }
 
         if (strafenListe.isEmpty()) {
             listText.setText("keine Strafen vorhanden.");
@@ -129,10 +129,10 @@ public class GesamtListeActivity extends ListActivity implements AdapterView.OnI
         }
         else {
             listText.setText("Strafen offen: "+String.format("%.2f", overallgesamtSumme) + "€\n"
-                    + "Gezahlt gesamt: "+String.format("%.2f", overallgesamtGezahlt*(-1)) + "€\n"
+                    + "In der Kasse: "+String.format("%.2f", overallgesamtGezahlt*(-1)-overallgesamtAbgehoben*(-1)) + "€\n"
                     + "Abgehoben: "+String.format("%.2f", overallgesamtAbgehoben*(-1)) + "€");
             teilenListe = teilenListe + "\nStrafen offen: "+String.format("%.2f", overallgesamtSumme) + "€\n"
-                    + "Gezahlt gesamt: "+String.format("%.2f", overallgesamtGezahlt*(-1)) + "€\n"
+                    + "In der Kasse: "+String.format("%.2f", overallgesamtGezahlt*(-1)-overallgesamtAbgehoben*(-1)) + "€\n"
                     + "Abgehoben: "+String.format("%.2f", overallgesamtAbgehoben*(-1)) + "€";
         }
         String[] from = new String[] { "spieler", "gesamt"};
@@ -152,6 +152,10 @@ public class GesamtListeActivity extends ListActivity implements AdapterView.OnI
 
             }
         });*/
+    }
+
+    public void clickText(View v){
+        Toast.makeText(GesamtListeActivity.this, "CLICK", Toast.LENGTH_LONG).show();
     }
 
     @Override
