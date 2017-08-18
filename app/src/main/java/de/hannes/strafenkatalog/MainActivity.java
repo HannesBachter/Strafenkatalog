@@ -343,6 +343,68 @@ public class MainActivity extends ActionBarActivity implements AdapterView.OnIte
 
                 //startActivity(Intent.createChooser(i, "Strafenliste senden"));
                 break;
+            case R.id.abheben:
+                final String spielerName = getString(R.string.spieler_abheben);
+                final Dialog geldAbheben = new Dialog(this);
+                geldAbheben.setContentView(R.layout.dialog_gezahlt);
+                geldAbheben.setTitle(getString(R.string.bt_abheben));
+
+                Button btOKAbh = (Button) geldAbheben.findViewById(R.id.bt_gez_ok);
+                Button btESCAbh = (Button) geldAbheben.findViewById(R.id.bt_gez_esc);
+                final EditText etAbh = (EditText) geldAbheben.findViewById(R.id.et_gezahlt);
+                final EditText etAbhGrund = (EditText) geldAbheben.findViewById(R.id.et_grund_bez);
+                // Attached listener for Anlegen button
+                btOKAbh.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (!etAbh.getText().toString().equals("")) {
+                            String abhName = getString(R.string.bt_abheben);
+                            if (!StrafenDB.getAllStrafenNamen().contains(abhName)) {
+                                //Wenn Abheben schon existiert, dann hinzufügen sonst neu:
+                                StrafenDB.strafeEinfügen(abhName, -1f);
+                                SpielerDB.strafenSpalteHinzufügen(StrafenDB.strafeIdFinden(abhName));
+                                Log.w("MainAct:Abheben","Abheben: Name "+spielerName+" id "+StrafenDB.strafeIdFinden(abhName)+ " text "+etAbh.getText().toString());
+                            }
+                            int strafenId = StrafenDB.strafeIdFinden(abhName);
+                            if (!SpielerDB.getAllSpielerNamen().contains(spielerName))
+                                SpielerDB.spielerEinfügen(spielerName);
+                            SpielerDB.strafeEintragen(spielerName, strafenId, Float.valueOf(etAbh.getText().toString()));
+                            Calendar kal = Calendar.getInstance();
+                            String grundAbh = etAbhGrund.getText().toString();
+                            //if(grundAbh.isEmpty())
+                            //    grundAbh = getString(R.string.kein_grund);
+                            Log.w("MainAct:Abheben", "Spieler: "+spielerName+" Strafen ID:"+strafenId+" Kalender:"+String.valueOf(kal.get(Calendar.DATE))+String.valueOf(kal.get(Calendar.MONTH)+1)+String.valueOf(kal.get(Calendar.YEAR))+" Text: "+etAbh.getText().toString() +" Grund: "+ grundAbh);
+                            SpStRelDB.relationEinfügen(spielerName, strafenId,
+                                    kal.get(Calendar.DATE), kal.get(Calendar.MONTH)+1, kal.get(Calendar.YEAR), etAbh.getText().toString() +"€ - "+ grundAbh);
+                            showToast(etAbh.getText().toString() + "€ abgehoben.");
+
+                            geldAbheben.dismiss();
+                        }  else
+                            runOnUiThread(new Runnable() {
+                                public void run() {
+                                    new AlertDialog.Builder(mainActivity)
+                                            .setTitle("Warnung!")
+                                            .setMessage("Bitte Summe eingeben.")
+                                            .setPositiveButton(R.string.bt_esc, new DialogInterface.OnClickListener() {
+                                                public void onClick(DialogInterface dialog, int which) {
+                                                    // continue
+                                                }
+                                            })
+                                            .setIcon(android.R.drawable.ic_dialog_alert)
+                                            .show();
+
+                                }
+                            });
+                    }
+                });
+                btESCAbh.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        geldAbheben.dismiss();
+                    }
+                });
+                geldAbheben.show();
+                break;
         }
         return super.onOptionsItemSelected(item);
     }
@@ -426,7 +488,7 @@ public class MainActivity extends ActionBarActivity implements AdapterView.OnIte
                                 for (int plusCount = 0; plusCount < plus; plusCount++) {
                                     SpStRelDB.relationEinfügen(spielerName, StrafenDB.strafeIdFinden(strafenName), kal.get(Calendar.DATE), kal.get(Calendar.MONTH) + 1, kal.get(Calendar.YEAR), getString(R.string.tv_import_grund));
                                 }
-                            }else {
+                            }else if (plus > 0.0) {
                                 SpStRelDB.relationEinfügen(spielerName, StrafenDB.strafeIdFinden(strafenName), kal.get(Calendar.DATE), kal.get(Calendar.MONTH) + 1, kal.get(Calendar.YEAR),
                                         String.format("%.2f",plus)+"€ - "+getString(R.string.tv_import_grund));
                             }

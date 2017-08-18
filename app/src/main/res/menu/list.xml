@@ -9,7 +9,4 @@
     <item android:id="@+id/teilen"
         android:title="Teilen"
         app:showAsAction="never"/>
-    <item android:id="@+id/abheben"
-        android:title="@string/bt_abheben"
-        app:showAsAction="never"/>
 </menu>

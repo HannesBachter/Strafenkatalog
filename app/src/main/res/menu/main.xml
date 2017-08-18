@@ -30,4 +30,7 @@
     <item android:id="@+id/strafenkatalog_teilen"
         android:title="Strafenkatalog teilen"
         app:showAsAction="never"/>
+    <item android:id="@+id/abheben"
+        android:title="@string/bt_abheben"
+        app:showAsAction="never"/>
 </menu>
