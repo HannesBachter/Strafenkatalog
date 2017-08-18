@@ -36,7 +36,7 @@ public class GesamtListeActivity extends ListActivity implements AdapterView.OnI
     private ArrayList<String> strafenArray = new ArrayList<String>();
     private ArrayList<String> spielerArray = new ArrayList<String>();
     private TextView listText;
-    private float strafenSumme, gesamtSumme, overallgesamtSumme, overallgesamtAbhahlt;
+    private float strafenSumme, gesamtSumme, overallgesamtSumme=0, overallgesamtGezahlt=0, overallgesamtAbgehoben=0;
     private int[] strafenFaktor;//= {1,3,2,3,7,2,2,20,20,2,5,10,5,-20};
     private String strafenAnzahl, strafenSumm;
 
@@ -60,6 +60,8 @@ public class GesamtListeActivity extends ListActivity implements AdapterView.OnI
 
         StrafenDB = new SQLAgent_Strafen(this);
         SpielerDB = new SQLAgent_Spieler(this);
+        SpStRelDB = new SQLAgent_SpStRel(this);
+
 
         Bundle extras = getIntent().getExtras();
         spielerArray =  extras.getStringArrayList("SPIELERARR");
@@ -84,7 +86,7 @@ public class GesamtListeActivity extends ListActivity implements AdapterView.OnI
                     if (cellval > 0) {
                         strafenSumme = cellval * StrafenDB.strafeFaktorFinden(strafeName); //strafenFaktor[strafeIndex];
                         gesamtSumme = strafenSumme + gesamtSumme;
-                        Log.w("GesList:Create", "GesamtListe SpielerSumme");
+                        Log.w("GesList:Create", "GesamtListe Spieler "+spielerName+" Summe = "+String.valueOf(gesamtSumme));
                     }
                 }
             }
@@ -95,7 +97,17 @@ public class GesamtListeActivity extends ListActivity implements AdapterView.OnI
                 if (cellval > 0) {
                     strafenSumme = cellval * StrafenDB.strafeFaktorFinden(strafeGez); //strafenFaktor[strafeIndex];
                     gesamtSumme = strafenSumme + gesamtSumme;
-                    overallgesamtAbhahlt = overallgesamtAbhahlt + strafenSumme;
+                    overallgesamtGezahlt = overallgesamtGezahlt + strafenSumme;
+                }
+            }
+            String strafeAbh = getString(R.string.bt_abheben);
+            String spielerAbh = getString(R.string.spieler_abheben);
+            if(StrafenDB.getAllStrafenNamen().contains(strafeAbh)){
+                float cellval = SpielerDB.strafeAuslesen(spielerAbh, Integer.valueOf(StrafenDB.strafeIdFinden(strafeAbh)));
+                if (cellval > 0) {
+                    strafenSumme = cellval * StrafenDB.strafeFaktorFinden(strafeAbh); //strafenFaktor[strafeIndex];
+                    //gesamtSumme = strafenSumme + gesamtSumme;
+                    overallgesamtAbgehoben = overallgesamtAbgehoben + strafenSumme;
                 }
             }
 
@@ -116,10 +128,12 @@ public class GesamtListeActivity extends ListActivity implements AdapterView.OnI
             teilenListe = teilenListe + "Keine Strafen vorhanden.";
         }
         else {
-            listText.setText("Strafen offen: "+String.format("%.2f", overallgesamtSumme) + "€\n" +
-                    "Gezahlt gesamt: "+String.format("%.2f", overallgesamtAbhahlt*(-1)) + "€");
+            listText.setText("Strafen offen: "+String.format("%.2f", overallgesamtSumme) + "€\n"
+                    + "Gezahlt gesamt: "+String.format("%.2f", overallgesamtGezahlt*(-1)) + "€\n"
+                    + "Abgehoben: "+String.format("%.2f", overallgesamtAbgehoben*(-1)) + "€");
             teilenListe = teilenListe + "\nStrafen offen: "+String.format("%.2f", overallgesamtSumme) + "€\n"
-                    + "Gezahlt gesamt: "+String.format("%.2f", overallgesamtAbhahlt*(-1)) + "€";
+                    + "Gezahlt gesamt: "+String.format("%.2f", overallgesamtGezahlt*(-1)) + "€\n"
+                    + "Abgehoben: "+String.format("%.2f", overallgesamtAbgehoben*(-1)) + "€";
         }
         String[] from = new String[] { "spieler", "gesamt"};
         int[] to = new int[] {R.id.tv_spieler, R.id.tv_gesamt};
@@ -211,7 +225,6 @@ public class GesamtListeActivity extends ListActivity implements AdapterView.OnI
                 btOKAbh.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Toast.makeText(GesamtListeActivity.this, etAbh.getText().toString() + "€ für " + etAbhGrund.getText().toString() + "abgehoben.", Toast.LENGTH_SHORT).show();
                         if (!etAbh.getText().toString().equals("")) {
                             String abhName = getString(R.string.bt_abheben);
                             if (!StrafenDB.getAllStrafenNamen().contains(abhName)) {
@@ -228,10 +241,16 @@ public class GesamtListeActivity extends ListActivity implements AdapterView.OnI
                             String grundAbh = etAbhGrund.getText().toString();
                             //if(grundAbh.isEmpty())
                             //    grundAbh = getString(R.string.kein_grund);
-
+                            Log.w("GesList:Abheben", "Spieler: "+spielerName+" Strafen ID:"+strafenId+" Kalender:"+String.valueOf(kal.get(Calendar.DATE))+String.valueOf(kal.get(Calendar.MONTH)+1)+String.valueOf(kal.get(Calendar.YEAR))+" Text: "+etAbh.getText().toString() +" Grund: "+ grundAbh);
                             SpStRelDB.relationEinfügen(spielerName, strafenId,
                                     kal.get(Calendar.DATE), kal.get(Calendar.MONTH)+1, kal.get(Calendar.YEAR), etAbh.getText().toString() +"€ - "+ grundAbh);
-                            Toast.makeText(GesamtListeActivity.this, etAbh.getText().toString() + "€ bei " + spielerName + " gutgeschrieben.", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(GesamtListeActivity.this, etAbh.getText().toString() + "€ abgehoben.", Toast.LENGTH_SHORT).show();
+
+                            overallgesamtAbgehoben = overallgesamtAbgehoben-Float.valueOf(etAbh.getText().toString());
+                            listText.setText("Strafen offen: "+String.format("%.2f", overallgesamtSumme) + "€\n" +
+                                    "Gezahlt gesamt: "+String.format("%.2f", overallgesamtGezahlt*(-1)) + "€" +
+                                    "\nAbgehoben: "+String.format("%.2f", overallgesamtAbgehoben*(-1)) + "€");
+
                             geldAbheben.dismiss();
                         }  else
                             runOnUiThread(new Runnable() {

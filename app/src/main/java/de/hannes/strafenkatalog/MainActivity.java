@@ -760,6 +760,10 @@ public class MainActivity extends ActionBarActivity implements AdapterView.OnIte
 
     public void updateSpielerArray() {
         spielerArray = SpielerDB.getAllSpielerNamen();
+
+        if (spielerArray.contains(getString(R.string.spieler_abheben))) {
+            spielerArray.remove(getString(R.string.spieler_abheben));
+        }
     }
 
     public void updateStrafenArray() {
@@ -767,6 +771,10 @@ public class MainActivity extends ActionBarActivity implements AdapterView.OnIte
         //"Gezahlt" soll nicht bei Strafen vorkommen
         if (strafenArray.contains(getString(R.string.bt_gezahlt))) {
             strafenArray.remove(getString(R.string.bt_gezahlt));
+        }
+        //"Geld abheben" soll auch nicht angezeigt werden
+        if (strafenArray.contains(getString(R.string.bt_abheben))) {
+            strafenArray.remove(getString(R.string.bt_abheben));
         }
     }
 
