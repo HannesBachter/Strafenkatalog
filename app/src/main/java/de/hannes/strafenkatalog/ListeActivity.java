@@ -234,17 +234,11 @@ public class ListeActivity extends ListActivity implements AdapterView.OnItemCli
 
         if (strafenListe.isEmpty()) {
             listText.setText("keine Strafen vorhanden.");
-
             teilenListe = teilenListe + "Keine Strafen vorhanden.";
         }
         else {
-            if(!spielerName.equals(getString(R.string.spieler_abheben)))
-                listText.setText("Strafen von "+spielerName+" gesamt: " + String.format("%.2f", gesamtSumme) + "€");
-            else
-                listText.setText("Ausgaben gesamt: " + String.format("%.2f", gesamtSumme) + "€");
-
+            listText.setText("Strafen von "+spielerName+" gesamt: " + String.format("%.2f", gesamtSumme) + "€");
             teilenListe = teilenListe +"\nGesamt:\t"+ String.format("%.2f", gesamtSumme) + "€";
-
             gesamtSumme = 0;
         }
         String[] from = new String[] { "anzahl", "strafe", "summe"};

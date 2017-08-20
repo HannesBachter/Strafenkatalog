@@ -260,6 +260,7 @@ public class RelationListeActivity extends ListActivity implements AdapterView.O
         btDEL.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //TODO: ABHEBEN LÖSCHEN!!!
                 final AlertDialog.Builder builder = new AlertDialog.Builder(RelationListeActivity.this);
                 String dialogMessage = getResources().getString(R.string.dialog_del_message_st1) + " '" + strafenName + "' " + getResources().getString(R.string.dialog_del_message_3);
                 builder.setMessage(dialogMessage);
