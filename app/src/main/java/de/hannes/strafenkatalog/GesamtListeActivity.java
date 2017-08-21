@@ -36,7 +36,7 @@ public class GesamtListeActivity extends ListActivity implements AdapterView.OnI
     private ArrayList<String> strafenArray = new ArrayList<String>();
     private ArrayList<String> spielerArray = new ArrayList<String>();
     private TextView listText;
-    private float strafenSumme, gesamtSumme, overallgesamtSumme=0, overallgesamtGezahlt=0, overallgesamtAbgehoben=-0f;
+    private float strafenSumme, gesamtSumme, overallgesamtSumme, overallgesamtGezahlt, overallgesamtAbgehoben;
     private int[] strafenFaktor;//= {1,3,2,3,7,2,2,20,20,2,5,10,5,-20};
     private String strafenAnzahl, strafenSumm;
 
@@ -52,10 +52,24 @@ public class GesamtListeActivity extends ListActivity implements AdapterView.OnI
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        Log.w("GesList:Create","GesamtListe onCreate");
-
         setContentView(R.layout.activity_list);
+
+        /*lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            public void onItemClick(AdapterView<?> parent, View view,
+                                    int position, long id) {
+                // When clicked, show a toast with the TextView text
+                Toast.makeText(gesamtListeActivity, "Click - onlist", Toast.LENGTH_SHORT).show();
+
+            }
+        });*/
+    }
+
+    @Override
+    public void onResume(){
+        super.onResume();
+
+        Log.w("GesList:Resume","GesamtListe onResume");
+
         listText = (TextView) findViewById(R.id.tv_list);
 
         StrafenDB = new SQLAgent_Strafen(this);
@@ -68,6 +82,10 @@ public class GesamtListeActivity extends ListActivity implements AdapterView.OnI
         strafenArray = extras.getStringArrayList("STRAFENARR");
 
         teilenListe = "Strafen:\n";
+        strafenListe.clear();
+        overallgesamtAbgehoben = -0f;
+        overallgesamtGezahlt = 0;
+        overallgesamtSumme = 0;
 
         //Toast.makeText(this, "Strafenanzahl: " + String.valueOf(strafenArray.size()), Toast.LENGTH_SHORT).show();
         for (int spielerIndex = 0; spielerIndex < spielerArray.size(); spielerIndex++) {
@@ -144,14 +162,6 @@ public class GesamtListeActivity extends ListActivity implements AdapterView.OnI
         gesamtListView.setTextFilterEnabled(true);
         gesamtListView.setOnItemClickListener(this);
 
-        /*lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            public void onItemClick(AdapterView<?> parent, View view,
-                                    int position, long id) {
-                // When clicked, show a toast with the TextView text
-                Toast.makeText(gesamtListeActivity, "Click - onlist", Toast.LENGTH_SHORT).show();
-
-            }
-        });*/
     }
 
     public void clickText(View v){
