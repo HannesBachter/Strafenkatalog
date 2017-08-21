@@ -12,6 +12,7 @@
     <string name="falsches_zeichen">enthält ein irreguläres Zeichen (nur Buchstaben und Zahlen erlaubt).</string>
     <string name="kein_grund">*ohne Bemerkung*</string>
     <string name="spieler_abheben">StrafenwartAbheben</string>
+    <string name="abgehoben">Geld abgehoben</string>
     <string name="tv_strafe">Begangenes Vergehen:</string>
     <string name="bt_anlegen">Strafe eintragen</string>
     <string name="bt_loeschen">Strafe tilgen</string>

@@ -12,6 +12,7 @@ import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -66,7 +67,10 @@ public class RelationListeActivity extends ListActivity implements AdapterView.O
         spielerName = extras.getString("SPIELER");
         strafenName = extras.getString("STRAFE");
 
-        listText.setText(strafenName);
+        if (!strafenName.equals(getString(R.string.bt_abheben)))
+            listText.setText(strafenName);
+        else
+            listText.setText(getString(R.string.abgehoben));
 
         teilenListe = spielerName +": "+ strafenName;
 
@@ -92,7 +96,7 @@ public class RelationListeActivity extends ListActivity implements AdapterView.O
                         else
                             sGrundTxt = sGrund;
                     }
-                    if((sGrundTxt.equals("") && sName.equals((getString(R.string.bt_gezahlt)))) || sGrund.equals(""))
+                    if((sGrundTxt.equals("") && sName.equals((getString(R.string.bt_gezahlt)))) || (sGrundTxt.equals("") && sName.equals((getString(R.string.bt_abheben)))) || sGrund.equals(""))
                         sGrund = sGrund + getString(R.string.kein_grund);
 
                     String tag = String.format("%02d", relCursor.getInt(relCursor.getColumnIndex("tag")));
@@ -161,13 +165,14 @@ public class RelationListeActivity extends ListActivity implements AdapterView.O
             //String grund = relCursor.getString(relCursor.getColumnIndex("grund"));
             grundOld = relCursor.getString(relCursor.getColumnIndex("grund"));
 
-            if(strafenName.equals(getString(R.string.bt_gezahlt))) {
+            if(strafenName.equals(getString(R.string.bt_gezahlt)) || strafenName.equals(getString(R.string.bt_abheben))) {
                 int idxG = grundOld.indexOf("€");
                 if(idxG>0)
                     anzahlGEZStr = Float.valueOf(grundOld.substring(0, idxG).replace(",","."));
                 if(grundOld.length()>3 && idxG<=grundOld.length()-4){
                     grundOld = grundOld.substring(idxG + 4);}
 
+                Log.w("RelList:OnItemClick","Grund: "+grundOld+" Strafe: "+anzahlGEZStr);
                 if(anzahlGEZStr==null){
                     relationÄndern.show();
                     //Dialog um Gezahlte Summe einzutragen, wenn Strafe mit alter App angelegt wurde (kein anzahlGEZ hinterlegt)
@@ -224,8 +229,9 @@ public class RelationListeActivity extends ListActivity implements AdapterView.O
                 int monat = dpDatum.getMonth()+1;
                 int jahr = dpDatum.getYear();
                 String grund = etGrund.getText().toString();
+                Log.w("RelList:OnOK","Strafen Name: "+strafenName+"Grund: "+grund+" Strafe: "+anzahlGEZStr);
 
-                if(strafenName.equals(getString(R.string.bt_gezahlt)) && anzahlGEZStr!=null)
+                if((strafenName.equals(getString(R.string.bt_gezahlt)) || strafenName.equals(getString(R.string.bt_abheben))) && anzahlGEZStr!=null)
                     SpStRelDB.updateRelation(SpStRelID, tag, monat, jahr, anzahlGEZStr+"€ - "+grund);
                 else
                     SpStRelDB.updateRelation(SpStRelID, tag, monat, jahr, grund);
@@ -234,7 +240,7 @@ public class RelationListeActivity extends ListActivity implements AdapterView.O
                 if(grund.equals(""))
                     grund = getString(R.string.kein_grund);
 
-                if(strafenName.equals(getString(R.string.bt_gezahlt)))
+                if(strafenName.equals(getString(R.string.bt_gezahlt)) || strafenName.equals(getString(R.string.bt_abheben)))
                     strafenMap.put("grund", anzahlGEZStr + "€ - " + grund);
                 else
                     strafenMap.put("grund", grund);
@@ -268,7 +274,9 @@ public class RelationListeActivity extends ListActivity implements AdapterView.O
                 builder.setPositiveButton(R.string.bt_del, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         // User clicked OK button
-                        if(strafenName.equals(getString(R.string.bt_gezahlt)) && anzahlGEZStr!=null) {
+                        Log.w("RelList:OnDel"," Strafe: "+anzahlGEZStr);
+
+                        if((strafenName.equals(getString(R.string.bt_gezahlt))  || strafenName.equals(getString(R.string.bt_abheben))) && anzahlGEZStr!=null) {
                             SpStRelDB.relationLöschen(SpStRelID);
                             SpielerDB.strafeEintragen(spielerName, StrafenDB.strafeIdFinden(strafenName), -anzahlGEZStr);
                             strafenListe.remove(pos);
@@ -361,7 +369,10 @@ public class RelationListeActivity extends ListActivity implements AdapterView.O
         {
             case R.id.teilen:
 
-                teilenListe = spielerName +": "+ strafenName;
+                if(!spielerName.equals(getString(R.string.spieler_abheben)))
+                    teilenListe = spielerName +": "+ strafenName;
+                else
+                    teilenListe = getString(R.string.abgehoben)+": ";
 
                 Cursor relCursor = SpStRelDB.getAllStrafen(spielerName);
                 String sName = "";
@@ -384,7 +395,7 @@ public class RelationListeActivity extends ListActivity implements AdapterView.O
                                 else
                                     sGrundTxt = sGrund;
                             }
-                            if((sGrundTxt.equals("") && sName.equals((getString(R.string.bt_gezahlt)))) || sGrund.equals(""))
+                            if((sGrundTxt.equals("") && sName.equals((getString(R.string.bt_gezahlt)))) || (sGrundTxt.equals("") && sName.equals((getString(R.string.bt_abheben)))) || sGrund.equals(""))
                                 sGrund = sGrund + getString(R.string.kein_grund);
 
                             String tag = String.format("%02d", relCursor.getInt(relCursor.getColumnIndex("tag")));
