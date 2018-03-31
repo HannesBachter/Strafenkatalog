@@ -134,9 +134,8 @@ public class GesamtListeActivity extends ListActivity implements AdapterView.OnI
         if(StrafenDB.getAllStrafenNamen().contains(strafeAbh)){
             float cellval = SpielerDB.strafeAuslesen(spielerAbh, Integer.valueOf(StrafenDB.strafeIdFinden(strafeAbh)));
             if (cellval > 0) {
-                strafenSumme = cellval * StrafenDB.strafeFaktorFinden(strafeAbh); //strafenFaktor[strafeIndex];
-                //gesamtSumme = strafenSumme + gesamtSumme;
-                overallgesamtAbgehoben = overallgesamtAbgehoben + strafenSumme;
+                overallgesamtAbgehoben = cellval * StrafenDB.strafeFaktorFinden(strafeAbh);
+                Log.w("GesListe:onResume", "strafen Summe von Geld abheben: "+String.valueOf(cellval)+" bei Faktor: "+String.valueOf(StrafenDB.strafeFaktorFinden(strafeAbh)));
             }
         }
 

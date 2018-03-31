@@ -89,13 +89,14 @@ public class RelationListeActivity extends ListActivity implements AdapterView.O
                 //Nur betreffende Strafen anzeigen
                 if(sName.equals(strafenName)) {
                     sGrund = relCursor.getString(relCursor.getColumnIndex("grund"));
-                    if(sName.equals(getString(R.string.bt_gezahlt))) {
+                    if(sName.equals(getString(R.string.bt_gezahlt)) || sName.equals(getString(R.string.bt_abheben))) {
                         int idxG = sGrund.indexOf("€");
                         if(sGrund.length()>4)
                             sGrundTxt = sGrund.substring(idxG + 4);
                         else
                             sGrundTxt = sGrund;
                     }
+                    Log.w("RelList:onCreate", "Grund Txt: "+sGrundTxt+" Grund String: "+sGrund);
                     if((sGrundTxt.equals("") && sName.equals((getString(R.string.bt_gezahlt)))) || (sGrundTxt.equals("") && sName.equals((getString(R.string.bt_abheben)))) || sGrund.equals(""))
                         sGrund = sGrund + getString(R.string.kein_grund);
 
@@ -218,6 +219,7 @@ public class RelationListeActivity extends ListActivity implements AdapterView.O
         } else {
             //etDatum.setText("Fehler");
             etGrund.setText("Fehler");
+            //TODO: Löschen-Fehler beheben!
         }
 
         //Attached listener for Ändern button
@@ -266,7 +268,6 @@ public class RelationListeActivity extends ListActivity implements AdapterView.O
         btDEL.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //TODO: ABHEBEN LÖSCHEN!!!
                 final AlertDialog.Builder builder = new AlertDialog.Builder(RelationListeActivity.this);
                 String dialogMessage = getResources().getString(R.string.dialog_del_message_st1) + " '" + strafenName + "' " + getResources().getString(R.string.dialog_del_message_3);
                 builder.setMessage(dialogMessage);
@@ -388,13 +389,14 @@ public class RelationListeActivity extends ListActivity implements AdapterView.O
                         //Nur betreffende Strafen anzeigen
                         if (sName.equals(strafenName)) {
                             sGrund = relCursor.getString(relCursor.getColumnIndex("grund"));
-                            if(sName.equals(getString(R.string.bt_gezahlt))) {
+                            if(sName.equals(getString(R.string.bt_gezahlt)) || sName.equals(getString(R.string.bt_abheben))) {
                                 int idxG = sGrund.indexOf("€");
                                 if(sGrund.length()>4)
                                     sGrundTxt = sGrund.substring(idxG + 4);
                                 else
                                     sGrundTxt = sGrund;
                             }
+                            Log.w("RelList:OnOptSel", "Grund Txt: "+sGrundTxt+" Grund String: "+sGrund);
                             if((sGrundTxt.equals("") && sName.equals((getString(R.string.bt_gezahlt)))) || (sGrundTxt.equals("") && sName.equals((getString(R.string.bt_abheben)))) || sGrund.equals(""))
                                 sGrund = sGrund + getString(R.string.kein_grund);
 

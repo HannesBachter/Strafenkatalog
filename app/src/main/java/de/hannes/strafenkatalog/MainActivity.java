@@ -486,7 +486,7 @@ public class MainActivity extends ActionBarActivity implements AdapterView.OnIte
                         if (strafenId != -1) {
                             SpielerDB.strafeEintragen(spielerName, strafenId, plus);
                             Calendar kal = Calendar.getInstance();
-                            if(!strafenName.equals(getString(R.string.bt_gezahlt))) {
+                            if(!strafenName.equals(getString(R.string.bt_gezahlt)) && !strafenName.equals(getString(R.string.bt_abheben))) {
                                 for (int plusCount = 0; plusCount < plus; plusCount++) {
                                     SpStRelDB.relationEinfügen(spielerName, StrafenDB.strafeIdFinden(strafenName), kal.get(Calendar.DATE), kal.get(Calendar.MONTH) + 1, kal.get(Calendar.YEAR), getString(R.string.tv_import_grund));
                                 }
