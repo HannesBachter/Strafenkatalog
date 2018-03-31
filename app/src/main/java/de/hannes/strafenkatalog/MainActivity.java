@@ -44,6 +44,8 @@ import java.util.List;
 
 public class MainActivity extends ActionBarActivity implements AdapterView.OnItemSelectedListener {
 
+    static final int IMPORT_XLS = 2;  // Action Request code
+
     private Spinner spSpieler;
     private Spinner spStrafe;
     private int spielerIndex, strafeIndex;
@@ -215,6 +217,7 @@ public class MainActivity extends ActionBarActivity implements AdapterView.OnIte
             //Beim Auswählen wird Dialog Box geöffnet, in der Spieler gelöscht werden können
             case R.id.spieler_löschen:
                 if (!block) {
+                    //TODO: Prüfen, ob Spielerliste nicht leer!!
                     makeDialogSpielerLöschen();
 
                 } else
@@ -228,8 +231,8 @@ public class MainActivity extends ActionBarActivity implements AdapterView.OnIte
                 } else
                     makeAlertDialog(getString(R.string.dialog_block));
                 break;
-            case R.id.strafenkatalog_import:
 
+            case R.id.strafenkatalog_import:
                 if (spielerArray.isEmpty() && strafenArray.isEmpty() && !block) {
                     /*String umgebung = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).getAbsolutePath();
                     int idx1 = umgebung.lastIndexOf("/");
@@ -239,11 +242,11 @@ public class MainActivity extends ActionBarActivity implements AdapterView.OnIte
                 // if (this.getExternalFilesDir(null).listFiles().length == 0) {
                 //if (Environment.getExternalStoragePublicDirectory(umgebung).listFiles().length == 0) {
                     Intent fileIntent = new Intent(Intent.ACTION_GET_CONTENT);
-                    fileIntent.setType("application/excel");    //("file/*");
+                    fileIntent.setType("application/vnd.ms-excel");    //("*/*");
                     final PackageManager packageManager = mainActivity.getPackageManager();
                     List<ResolveInfo> activityList = packageManager.queryIntentActivities(fileIntent, PackageManager.GET_ACTIVITIES);
                     if(activityList.size() > 0) {
-                        startActivityForResult(fileIntent, 2);
+                        startActivityForResult(fileIntent, IMPORT_XLS);
                     }
                     else
                         makeAlertDialog("Kein Dateimanager installiert.");
@@ -1426,9 +1429,11 @@ public class MainActivity extends ActionBarActivity implements AdapterView.OnIte
                 }
 
                 break;
-            case 2:
+            // result from import Excel
+            case IMPORT_XLS:
                 if(data!=null) {
                     String name = data.getData().toString();
+                    Log.w("DEBUG_HANNES", "IMPORT XLS: " + name);
                     //Uri von übergebenem Verzeichnis
                     Uri uri = data.getData();//Uri.parse(data.getData().toString());
                     Pfadfinder pathFinder = new Pfadfinder();

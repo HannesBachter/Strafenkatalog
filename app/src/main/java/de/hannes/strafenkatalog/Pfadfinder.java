@@ -8,6 +8,7 @@ import android.os.Build;
 import android.os.Environment;
 import android.provider.DocumentsContract;
 import android.provider.MediaStore;
+import android.util.Log;
 
 /**
  * Created by hannes on 09.10.14.
@@ -107,8 +108,15 @@ public class Pfadfinder {
         try {
             cursor = context.getContentResolver().query(uri, projection, selection, selectionArgs,
                     null);
+            Log.w("DEBUG_HANNES", "getDataColumn cursor: " + cursor.toString());
             if (cursor != null && cursor.moveToFirst()) {
-                final int column_index = cursor.getColumnIndexOrThrow(column);
+                int column_index = 0;
+                try {
+                    column_index = cursor.getColumnIndexOrThrow(column);
+                }
+                catch (Exception e){
+                    Log.d("DEBUG_HANNES", "getDataColumn Error: " + e);
+                }
                 return cursor.getString(column_index);
             }
         } finally {
