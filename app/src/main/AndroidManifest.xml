@@ -14,8 +14,8 @@
         android:allowBackup="true"
         android:icon="@drawable/strafenkatalog_icon"
         android:label="@string/app_name"
-        android:versionCode="10"
-        android:versionName="1.1.5"
+        android:versionCode="11"
+        android:versionName="1.1.6"
         android:theme="@style/AppTheme" >
         <meta-data android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />

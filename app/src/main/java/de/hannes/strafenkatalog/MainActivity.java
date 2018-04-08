@@ -332,7 +332,6 @@ public class MainActivity extends ActionBarActivity implements AdapterView.OnIte
                 }
 
                 Intent shareIntent = new Intent(android.content.Intent.ACTION_SEND);
-
                 shareIntent.setType("text/plain");
                 shareIntent.putExtra(Intent.EXTRA_SUBJECT, "Strafenkatalog");
                 shareIntent.putExtra(Intent.EXTRA_TEXT, teilenListe);
@@ -575,11 +574,17 @@ public class MainActivity extends ActionBarActivity implements AdapterView.OnIte
                 vibrator.vibrate(500);
                 showToast(getString(R.string.t_exportende));
 
-                block = false;
                 //Gezahlt löschen, damit es nicht in Strafen-Spinner angezeigt wird
                 if (strafenArray.contains(getString(R.string.bt_gezahlt))) {
                     strafenArray.remove(getString(R.string.bt_gezahlt));
                 }
+                if (strafenArray.contains(getString(R.string.bt_abheben))) {
+                    strafenArray.remove(getString(R.string.bt_abheben));
+                }
+                if (spielerArray.contains(getString(R.string.spieler_abheben))) {
+                    spielerArray.remove(getString(R.string.spieler_abheben));
+                }
+                block = false;
             }
         };
         Thread exportThread = new Thread(exportieren);
